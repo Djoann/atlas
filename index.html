@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atlas</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Map Leaflet
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    -->
+    <link rel="stylesheet" href="css/map.css">
+	
+
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
+	<link href='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.css' rel='stylesheet' />
+	<!--[if lt IE 9]>
+	  <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+	<![endif]-->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+  </head>
+  <body>
+
+  	<!-- Primary Navbar -->
+  	<nav class="navbar navbar-default" role="navigation" id="primary-navbar">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Mayall</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <!--<li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">One more separated link</a></li>
+	          </ul>-->
+	        </li>
+	      </ul>
+	      
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span></a>
+	          <ul class="dropdown-menu">
+	            <li>
+	              <a href="#" class="list-group-item">
+				    <p class="list-group-item-text">Maxime veut rejoindre votre communauté</p>
+				  </a>
+				</li>
+	            <li>
+	              <a href="#" class="list-group-item">
+				    <p class="list-group-item-text">Marc vous a envoyé un message</p>
+				  </a>
+				</li>
+				<li>
+	              <a href="#" class="list-group-item">
+				    <p class="list-group-item-text">Lerem Ipsum</p>
+				  </a>
+				</li>
+				<li>
+	              <a href="#" class="list-group-item">
+				    <p class="list-group-item-text">Dolor Sit amen</p>
+				  </a>
+				</li>
+	          </ul>
+	        </li>
+	        <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span></a></li>
+	      	<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+	<!-- Secondary navbar -->
+	<nav class="navbar navbar-default" role="navigation" id="secondary-navbar">
+	  <div class="container-fluid">
+	    <!-- Toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe"></span> Atlas</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <form id="site-search" class="navbar-form navbar-left" role="search">
+	        <div class="form-group">
+	          <input type="text" id="site-search-input" class="form-control" placeholder="Rechercher sur le site">
+	        </div>
+	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+	      </form>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+		      	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></a>
+		      	<ul class="dropdown-menu">
+		            <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Nouveau projet</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#"><span class="glyphicon glyphicon-link"></span> Nouvelle communauté</a></li>
+		        </ul>
+	        </li>
+	        <li><a href="#"><span class="glyphicon glyphicon-globe"></span></a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-fire"></span></a></li>
+	        <li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+	<!-- Pannel -->
+	<div id="map-left-panel" class="panel panel-primary">
+	  <div class="panel-body">
+	    <div class="input-group">
+	      <input type="text" class="form-control" placeholder="Rechercher sur la carte">
+	      <span class="input-group-btn">
+	      </span>
+	    </div><!-- /input-group -->
+	    <div class="btn-group btn-group-justified">
+		  <div class="btn-group">
+		    <button type="button" class="btn btn-default">Communauté</button>
+		  </div>
+		  <div class="btn-group">
+		    <button type="button" class="btn btn-default">Projet</button>
+		  </div>
+		</div>
+		<div class="btn-group btn-group-justified">
+		  <div class="btn-group">
+		    <button type="button" class="btn btn-default">Communauté</button>
+		  </div>
+		  <div class="btn-group">
+		    <button type="button" class="btn btn-default">Projet</button>
+		  </div>
+		</div>
+		<a href="" id="advanced-research">Recherche avancée</a>
+	    <div id='info' class="list-group info">
+		  
+		</div>
+	  </div>
+	</div>
+	
+	<!-- Map -->
+	<div class="row" id="map-container">
+	  <div class="col-xs-12 col-md-12" id="map">
+	  </div>
+	</div>
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+	<!-- Leaflet controle location plugin -->
+    <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.js'></script>
+
+	<script src="js/main-mapbox.js"></script>
+	
+
+	<!-- Include Leaflet 
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>-->
+    <!--<script src="js/map.js"></script>-->
+  </body>
+</html>
